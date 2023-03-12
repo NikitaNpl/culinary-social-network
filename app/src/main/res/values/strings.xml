@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Culinary social network</string>
+    <string name="slogan">Discover a new world of taste</string>
+    <string name="sub_slogan">Find your perfect recipe with us</string>
+    <string name="search_bar_placeholder">Search for a recipes</string>
+    <string name="menu_item_recipes">Recipes</string>
+    <string name="menu_item_chats">Chats</string>
+    <string name="menu_item_favorites">Favorite</string>
+    <string name="menu_item_profile">Profile</string>
 </resources>

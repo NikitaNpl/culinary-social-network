@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dimensions for block content -->
+    <dimen name="default_layout_margin">20dp</dimen>
+    <dimen name="slogan_width">230dp</dimen>
+    <dimen name="bottom_bar_height">60dp</dimen>
+
+    <dimen name="search_bar_height">40dp</dimen>
+    <dimen name="search_bar_width">320dp</dimen>
+
+    <!-- Dimensions for recipe cards -->
+    <dimen name="recipe_card_height">200dp</dimen>
+    <dimen name="recipe_card_width">300dp</dimen>
+    <dimen name="recipe_card_image_height">150dp</dimen>
+
+    <!-- Dimensions for text content -->
+    <dimen name="slogan_sp">34sp</dimen>
+    <dimen name="sub_slogan_sp">16sp</dimen>
+
+    <dimen name="default_elevation">6dp</dimen>
+    <dimen name="default_corner_radius">10dp</dimen>
+</resources>
