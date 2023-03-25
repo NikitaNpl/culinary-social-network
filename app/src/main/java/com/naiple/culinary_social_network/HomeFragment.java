@@ -1,12 +1,17 @@
 package com.naiple.culinary_social_network;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +19,16 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
+    private static String TAG = "HeaderFragmentTAG";
+
+    private void showToast(String text) {
+        Toast toast = Toast.makeText(getContext(), text, Toast.LENGTH_LONG);
+        toast.show();
+    }
+
+    private void logMessage(String text) {
+        Log.d(TAG, text);
+    }
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -50,15 +65,89 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            showToast("onCreate");
+            logMessage("onCreate");
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        showToast("onAttach");
+        logMessage("onAttach");
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        showToast("onCreateView");
+        logMessage("onCreateView");
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        showToast("onViewCreated");
+        logMessage("onViewCreated");
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        showToast("onViewStateRestored");
+        logMessage("onViewStateRestored");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        showToast("onStart");
+        logMessage("onStart");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        showToast("onResume");
+        logMessage("onResume");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        showToast("onPause");
+        logMessage("onPause");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        showToast("onStop");
+        logMessage("onStop");
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        showToast("onSaveInstanceState");
+        logMessage("onSaveInstanceState");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        showToast("onDestroyView");
+        logMessage("onDestroyView");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        showToast("onDestroy");
+        logMessage("onDestroy");
     }
 }
