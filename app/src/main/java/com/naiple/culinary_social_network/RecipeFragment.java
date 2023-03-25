@@ -1,12 +1,21 @@
 package com.naiple.culinary_social_network;
 
+import android.annotation.SuppressLint;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.naiple.culinary_social_network.databinding.FragmentRecipeBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +23,7 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class RecipeFragment extends Fragment {
+    FragmentRecipeBinding fragmentRecipeBinding;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,7 +68,49 @@ public class RecipeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        fragmentRecipeBinding = FragmentRecipeBinding.inflate(inflater, container, false);
+        buttonsBinding(new Bundle());
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recipe, container, false);
+        return fragmentRecipeBinding.getRoot();
+    }
+
+    private void buttonsBinding(Bundle bundle) {
+        fragmentRecipeBinding.backToHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HomeFragment homeFragment = new HomeFragment();
+                Bundle bundle = getArguments();
+                String recipeName = "";
+                int recipePicture = 0;
+
+                if (bundle != null) {
+                    recipeName = bundle.getString("recipeName");
+                    recipePicture = bundle.getInt("recipePicture");
+                }
+
+                Bundle bundle1 = new Bundle();
+                bundle.putString("recipeName", recipeName);
+                bundle.putInt("recipePicture", recipePicture);
+                homeFragment.setArguments(bundle1);
+                FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentContainer, homeFragment).commit();
+            }
+        });
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            String recipeName = bundle.getString("recipeName");
+            int recipePicture = bundle.getInt("recipePicture");
+            TextView editRecipeName = view.findViewById(R.id.recipeNameFragment);
+            ImageView editRecipePicture = view.findViewById(R.id.recipePictureFragment);
+            editRecipeName.setText(recipeName);
+            editRecipePicture.setImageDrawable(getResources().getDrawable(recipePicture));
+
+        }
     }
 }
