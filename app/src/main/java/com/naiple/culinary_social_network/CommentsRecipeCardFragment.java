@@ -1,12 +1,24 @@
 package com.naiple.culinary_social_network;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.naiple.culinary_social_network.databinding.FragmentCommentsRecipeCardBinding;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,33 +27,19 @@ import android.view.ViewGroup;
  */
 public class CommentsRecipeCardFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    RecyclerView recyclerView;
+    FragmentCommentsRecipeCardBinding binding;
+    private final List<Item> items = new ArrayList<>();
+    private final RecyclerView.Adapter adapter_recycle = new ItemAdapter(this.items);
 
     public CommentsRecipeCardFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CommentsRecipeCardFragment.
-     */
     // TODO: Rename and change types and number of parameters
     public static CommentsRecipeCardFragment newInstance(String param1, String param2) {
         CommentsRecipeCardFragment fragment = new CommentsRecipeCardFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -49,16 +47,66 @@ public class CommentsRecipeCardFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_comments_recipe_card, container, false);
+        binding = FragmentCommentsRecipeCardBinding.inflate(inflater, container, false);
+        buttonsBinding();
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Bundle bundle = getArguments();
+        recyclerView = binding.recycler;
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter_recycle);
+        for(int i = 0; i < 200; i++){
+
+            this.items.add(new Item("Комментарий " + i));
+            adapter_recycle.notifyItemInserted(this.items.size() - 1);
+        }
+    }
+
+    private void buttonsBinding() {
+        binding.backToHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HomeFragment homeFragment = new HomeFragment();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragmentContainer, homeFragment).commit();
+            }
+        });
+    }
+
+    private static final class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+        private final List<Item> items;
+        public ItemAdapter(List<Item> items) {
+            this.items = items;
+        }
+        @NonNull
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int index) {
+
+            return new RecyclerView.ViewHolder(
+                    LayoutInflater.from(parent.getContext())
+                            .inflate(R.layout.fragment_list_element, parent, false)
+            ) {};
+        }
+
+        @Override
+        //начинает заполнять вью
+        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int index) {
+            TextView name = holder.itemView.findViewById(R.id.listTextValue);
+            name.setText(String.format("%s",  this.items.get(index).getName()));
+        }
+
+        @Override
+        public int getItemCount() {
+            return this.items.size();
+        }
     }
 }

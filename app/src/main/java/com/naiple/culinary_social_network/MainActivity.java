@@ -1,16 +1,23 @@
 package com.naiple.culinary_social_network;
 
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 
-public class MainActivity extends AppCompatActivity {
+import com.naiple.culinary_social_network.databinding.FragmentRecipeBinding;
 
+public class MainActivity extends AppCompatActivity {
     HomeFragment homeFragment;
-    RecipeFragment recipeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,10 +25,10 @@ public class MainActivity extends AppCompatActivity {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         homeFragment = new HomeFragment();
 
-        fragmentTransaction.add(R.id.fragmentContainer, homeFragment, "homeFragment");
-        fragmentTransaction.commit();
+        transaction.add(R.id.fragmentContainer, homeFragment, "homeFragment");
+        transaction.commit();
     }
 }

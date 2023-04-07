@@ -2,11 +2,18 @@ package com.naiple.culinary_social_network;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+
+import com.naiple.culinary_social_network.databinding.FragmentCommentsRecipeCardBinding;
+import com.naiple.culinary_social_network.databinding.FragmentLikesRecipeCardBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +21,8 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class LikesRecipeCardFragment extends Fragment {
+
+    FragmentLikesRecipeCardBinding binding;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,7 +67,32 @@ public class LikesRecipeCardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_likes_recipe_card, container, false);
+        binding = FragmentLikesRecipeCardBinding.inflate(inflater, container, false);
+        buttonsBinding();
+        return binding.getRoot();
+    }
+
+    private void buttonsBinding() {
+        binding.backToHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HomeFragment homeFragment = new HomeFragment();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragmentContainer, homeFragment).commit();
+            }
+        });
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ListView listView = binding.listView;
+        String[] names = new String[200];
+        for(int i = 0; i < 200; i++){
+            String like = "Лайк " + (i+1);
+            names[i] = like;
+        }
+        CustomStringArrayListAdapter adapterListView = new CustomStringArrayListAdapter(getContext(), R.layout.fragment_list_element, names);
+        listView.setAdapter(adapterListView);
     }
 }

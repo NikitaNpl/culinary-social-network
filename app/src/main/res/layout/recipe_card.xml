@@ -67,14 +67,14 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/toolbarButton1"
+                    android:id="@+id/recipeLikes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/like" />
 
                 <ImageButton
-                    android:id="@+id/toolbarButton2"
+                    android:id="@+id/recipeComments"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

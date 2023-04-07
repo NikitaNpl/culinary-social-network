@@ -70,25 +70,28 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         new Bundle();
         fragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false);
-        buttonsBinding(new Bundle());
-        // Inflate the layout for this fragment
+        buttonsBinding();
         return fragmentHomeBinding.getRoot();
     }
 
-    private void buttonsBinding(Bundle bundle) {
-        fragmentHomeBinding.recipeCard.recipePicture.setOnClickListener(new View.OnClickListener() {
+    private void buttonsBinding() {
+        fragmentHomeBinding.recipeCard.recipeLikes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RecipeFragment recipeFragment = new RecipeFragment();
-                String recipeName = fragmentHomeBinding.recipeCard.recipeName.getText().toString();
-                Drawable recipePicture = fragmentHomeBinding.recipeCard.recipePicture.getDrawable();
+                LikesRecipeCardFragment likesRecipeCardView = new LikesRecipeCardFragment();
 
-                Bundle bundle = new Bundle();
-                bundle.putString("recipeName", recipeName);
-                bundle.putInt("recipePicture", R.drawable.image_1);
-                recipeFragment.setArguments(bundle);
                 FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentContainer, recipeFragment).commit();
+                fragmentTransaction.replace(R.id.fragmentContainer, likesRecipeCardView).commit();
+            }
+        });
+
+        fragmentHomeBinding.recipeCard.recipeComments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CommentsRecipeCardFragment commentsRecipeCardView = new CommentsRecipeCardFragment();
+
+                FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentContainer, commentsRecipeCardView).commit();
             }
         });
     }
