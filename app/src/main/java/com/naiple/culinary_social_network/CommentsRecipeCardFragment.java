@@ -10,10 +10,12 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.naiple.culinary_social_network.databinding.FragmentCommentsRecipeCardBinding;
 
@@ -26,7 +28,7 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class CommentsRecipeCardFragment extends Fragment {
-
+    private static String TAG = "CommentsRecipeCardFragment";
     RecyclerView recyclerView;
     FragmentCommentsRecipeCardBinding binding;
     private final List<Item> items = new ArrayList<>();
@@ -98,10 +100,17 @@ public class CommentsRecipeCardFragment extends Fragment {
         }
 
         @Override
-        //начинает заполнять вью
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int index) {
             TextView name = holder.itemView.findViewById(R.id.listTextValue);
             name.setText(String.format("%s",  this.items.get(index).getName()));
+            holder.itemView.setOnClickListener (new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i(TAG, "Нажали на странице с комментариями");
+                    Toast toast = Toast.makeText(v.getContext(), "нажали на " +
+                            (index+1), Toast.LENGTH_LONG );
+                    toast.show();
+                }});
         }
 
         @Override

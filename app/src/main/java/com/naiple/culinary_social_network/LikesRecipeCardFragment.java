@@ -7,10 +7,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.naiple.culinary_social_network.databinding.FragmentCommentsRecipeCardBinding;
 import com.naiple.culinary_social_network.databinding.FragmentLikesRecipeCardBinding;
@@ -22,6 +25,7 @@ import com.naiple.culinary_social_network.databinding.FragmentLikesRecipeCardBin
  */
 public class LikesRecipeCardFragment extends Fragment {
 
+    private static String TAG = "LikesRecipeCardFragment";
     FragmentLikesRecipeCardBinding binding;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -69,6 +73,16 @@ public class LikesRecipeCardFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentLikesRecipeCardBinding.inflate(inflater, container, false);
         buttonsBinding();
+
+        binding.listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                Toast toast = Toast.makeText(getContext(), "нажали на " + (position+1), Toast.LENGTH_LONG );
+                toast.show();
+                Log.i(TAG, "Нажали на странице с лайками");
+            }
+        });
+
         return binding.getRoot();
     }
 
