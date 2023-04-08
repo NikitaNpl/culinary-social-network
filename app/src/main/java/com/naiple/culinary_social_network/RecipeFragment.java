@@ -92,8 +92,6 @@ public class RecipeFragment extends Fragment {
                 bundle.putString("recipeName", recipeName);
                 bundle.putInt("recipePicture", recipePicture);
                 homeFragment.setArguments(bundle1);
-                FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentContainer, homeFragment).commit();
             }
         });
     }

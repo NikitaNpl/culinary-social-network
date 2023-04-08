@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_application"
+    app:startDestination="@id/homeFragment2">
+
+    <fragment
+        android:id="@+id/homeFragment2"
+        android:name="com.naiple.culinary_social_network.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment2_to_commentsRecipeCardFragment2"
+            app:destination="@id/commentsRecipeCardFragment2" />
+        <action
+            android:id="@+id/action_homeFragment2_to_likesRecipeCardFragment"
+            app:destination="@id/likesRecipeCardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/likesRecipeCardFragment"
+        android:name="com.naiple.culinary_social_network.LikesRecipeCardFragment"
+        android:label="LikesRecipeCardFragment" >
+        <action
+            android:id="@+id/action_likesRecipeCardFragment_to_homeFragment2"
+            app:destination="@id/homeFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/commentsRecipeCardFragment2"
+        android:name="com.naiple.culinary_social_network.CommentsRecipeCardFragment"
+        android:label="CommentsRecipeCardFragment" >
+        <action
+            android:id="@+id/action_commentsRecipeCardFragment2_to_homeFragment2"
+            app:destination="@id/homeFragment2" />
+    </fragment>
+</navigation>

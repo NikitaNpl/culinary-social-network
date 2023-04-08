@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,19 +32,13 @@ public class CommentsRecipeCardFragment extends Fragment {
     private static String TAG = "CommentsRecipeCardFragment";
     RecyclerView recyclerView;
     FragmentCommentsRecipeCardBinding binding;
+
+    private Bundle result;
     private final List<Item> items = new ArrayList<>();
     private final RecyclerView.Adapter adapter_recycle = new ItemAdapter(this.items);
 
     public CommentsRecipeCardFragment() {
         // Required empty public constructor
-    }
-
-    // TODO: Rename and change types and number of parameters
-    public static CommentsRecipeCardFragment newInstance(String param1, String param2) {
-        CommentsRecipeCardFragment fragment = new CommentsRecipeCardFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
@@ -55,6 +50,12 @@ public class CommentsRecipeCardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentCommentsRecipeCardBinding.inflate(inflater, container, false);
+
+        if (this.getArguments() != null) {
+            result = this.getArguments();
+            String textArg = result.getString("arg");
+        }
+
         buttonsBinding();
         return binding.getRoot();
     }
@@ -77,9 +78,9 @@ public class CommentsRecipeCardFragment extends Fragment {
         binding.backToHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                HomeFragment homeFragment = new HomeFragment();
-                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragmentContainer, homeFragment).commit();
+                result = new Bundle();
+                result.putString("arg", "Third");
+                Navigation.findNavController(view).navigate(R.id.action_commentsRecipeCardFragment2_to_homeFragment2, result);
             }
         });
     }

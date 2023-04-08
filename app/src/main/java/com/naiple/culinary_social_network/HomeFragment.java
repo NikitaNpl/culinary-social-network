@@ -8,11 +8,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.naiple.culinary_social_network.databinding.FragmentHomeBinding;
@@ -24,6 +26,8 @@ import com.naiple.culinary_social_network.databinding.FragmentHomeBinding;
  */
 public class HomeFragment extends Fragment {
     public FragmentHomeBinding fragmentHomeBinding;
+
+    private Bundle result;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,10 +63,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -70,6 +70,14 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         new Bundle();
         fragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false);
+
+        if (getArguments() != null) {
+            TextView recipeName = fragmentHomeBinding.recipeCard.author;
+            result = this.getArguments();
+            String textArg = recipeName.getText() + " " + result.getString("arg");
+            recipeName.setText(textArg);
+        }
+
         buttonsBinding();
         return fragmentHomeBinding.getRoot();
     }
@@ -78,20 +86,18 @@ public class HomeFragment extends Fragment {
         fragmentHomeBinding.recipeCard.recipeLikes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LikesRecipeCardFragment likesRecipeCardView = new LikesRecipeCardFragment();
-
-                FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentContainer, likesRecipeCardView).commit();
+                result = new Bundle();
+                result.putString("arg", "First");
+                Navigation.findNavController(view).navigate(R.id.action_homeFragment2_to_likesRecipeCardFragment, result);
             }
         });
 
         fragmentHomeBinding.recipeCard.recipeComments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CommentsRecipeCardFragment commentsRecipeCardView = new CommentsRecipeCardFragment();
-
-                FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentContainer, commentsRecipeCardView).commit();
+                result = new Bundle();
+                result.putString("arg", "First");
+                Navigation.findNavController(view).navigate(R.id.action_homeFragment2_to_commentsRecipeCardFragment2, result);
             }
         });
     }
@@ -103,7 +109,7 @@ public class HomeFragment extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             String recipeName = bundle.getString("recipeName");
-            int recipePicture =  bundle.getInt("recipePicture");
+            int recipePicture = bundle.getInt("recipePicture");
         }
     }
 
