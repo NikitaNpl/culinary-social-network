@@ -81,7 +81,7 @@
                     app:srcCompat="@drawable/chat" />
 
                 <ImageButton
-                    android:id="@+id/toolbarButton3"
+                    android:id="@+id/recipeFavorites"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
