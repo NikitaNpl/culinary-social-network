@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment2"
-        android:name="com.naiple.culinary_social_network.HomeFragment"
+        android:name="com.naiple.culinary_social_network.ui.fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/likesRecipeCardFragment"
-        android:name="com.naiple.culinary_social_network.LikesRecipeCardFragment"
+        android:name="com.naiple.culinary_social_network.ui.fragments.LikesRecipeCardFragment"
         android:label="LikesRecipeCardFragment" >
         <action
             android:id="@+id/action_likesRecipeCardFragment_to_homeFragment2"
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/commentsRecipeCardFragment2"
-        android:name="com.naiple.culinary_social_network.CommentsRecipeCardFragment"
+        android:name="com.naiple.culinary_social_network.ui.fragments.CommentsRecipeCardFragment"
         android:label="CommentsRecipeCardFragment" >
         <action
             android:id="@+id/action_commentsRecipeCardFragment2_to_homeFragment2"

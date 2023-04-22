@@ -1,4 +1,4 @@
-package com.naiple.culinary_social_network;
+package com.naiple.culinary_social_network.data.model;
 
 import java.util.Objects;
 
