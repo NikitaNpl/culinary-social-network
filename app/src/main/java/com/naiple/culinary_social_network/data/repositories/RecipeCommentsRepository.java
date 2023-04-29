@@ -21,6 +21,8 @@ public class RecipeCommentsRepository {
     private List<EntityItem> comments;
     ItemDatabase db;
     ItemDAO itemDao;
+
+    private DataRecipeComments dataRecipeComments;
     private Context context;
     private final MutableLiveData<List<EntityItem>> commentsLive = new MutableLiveData<>();
 
@@ -28,6 +30,8 @@ public class RecipeCommentsRepository {
         this.context = context;
         ItemDatabase db = ItemDatabase.getDatabase(context);
         ItemDAO itemDao = db.itemDao();
+
+        dataRecipeComments = new DataRecipeComments();
 
         comments = new ArrayList<>();
         comments.add(new EntityItem("Comment1"));
@@ -47,6 +51,14 @@ public class RecipeCommentsRepository {
     public void removeAllRecipeComment(EntityItem comment) {
         itemDao.deleteAll();
         commentsLive.setValue(comments);
+    }
+
+    public void saveToFile(String fileName, String data, Context context) {
+        dataRecipeComments.saveToFile(fileName, data, context);
+    }
+
+    public void saveToFileSharedStorage(String fileName, String data, Context context) {
+        dataRecipeComments.saveToFileSharedStorage(fileName, data, context);
     }
 
     public LiveData<List<EntityItem>> getRecipeCommentsLive() {

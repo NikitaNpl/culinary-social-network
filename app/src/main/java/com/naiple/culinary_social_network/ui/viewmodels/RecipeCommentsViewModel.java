@@ -33,37 +33,8 @@ public class RecipeCommentsViewModel extends ViewModel {
     }
 
     public void addRecipeComment(EntityItem comment) {
-        class FileStoreUtility {
-            public void saveToFile(String fileName, String data, Context context) {
-                File file = new File(context.getFilesDir(), fileName + ".txt");
-                try {
-                    FileOutputStream fos = new FileOutputStream(file);
-                    fos.write(data.getBytes());
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            public void saveToFileSharedStorage(String fileName, String data, Context context) {
-                String type = Environment.DIRECTORY_DOWNLOADS;
-                File file = new File(Environment.getExternalStoragePublicDirectory(type), fileName + ".txt");
-
-
-                try {
-                    FileOutputStream fos = new FileOutputStream(file);
-                    fos.write(data.getBytes());
-                    fos.close();
-                    Log.i("test", String.valueOf(file));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        FileStoreUtility fsu = new FileStoreUtility();
-        fsu.saveToFile("LastAddedComment", comment.getText(), context);
-        fsu.saveToFileSharedStorage("LastAddedComment", comment.getText(), context);
+        recipeCommentsRepository.saveToFile("LastAddedComment", comment.getText(), context);
+        recipeCommentsRepository.saveToFileSharedStorage("LastAddedComment", comment.getText(), context);
 
         recipeCommentsRepository.addRecipeComment(comment);
     }
