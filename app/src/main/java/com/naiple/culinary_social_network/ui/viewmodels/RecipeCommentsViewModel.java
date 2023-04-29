@@ -23,8 +23,11 @@ public class RecipeCommentsViewModel extends ViewModel {
     private RecipeCommentsRepository recipeCommentsRepository;
     private Context context;
 
+    private SharedPreferences sharedPreferences;
+
     public void init(Context context, SharedPreferences sharedPrefs) {
         this.context = context;
+        this.sharedPreferences = sharedPrefs;
         recipeCommentsRepository = new RecipeCommentsRepository(context);
     }
 
@@ -33,9 +36,7 @@ public class RecipeCommentsViewModel extends ViewModel {
     }
 
     public void addRecipeComment(EntityItem comment) {
-        recipeCommentsRepository.saveToFile("LastAddedComment", comment.getText(), context);
-        recipeCommentsRepository.saveToFileSharedStorage("LastAddedComment", comment.getText(), context);
-
+        recipeCommentsRepository.saveToFileSharedStorage("LastAddedComment", comment.getText(), sharedPreferences);
         recipeCommentsRepository.addRecipeComment(comment);
     }
 }

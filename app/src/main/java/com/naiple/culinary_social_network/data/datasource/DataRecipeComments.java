@@ -1,6 +1,7 @@
 package com.naiple.culinary_social_network.data.datasource;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Environment;
 import android.util.Log;
 
@@ -28,7 +29,7 @@ public class DataRecipeComments {
     }
 
 
-        public void saveToFile(String fileName, String data, Context context) {
+        public static void saveToFile(String fileName, String data, Context context) {
             File file = new File(context.getFilesDir(), fileName + ".txt");
             try {
                 FileOutputStream fos = new FileOutputStream(file);
@@ -39,7 +40,7 @@ public class DataRecipeComments {
             }
         }
 
-        public void saveToFileSharedStorage(String fileName, String data, Context context) {
+        public static void saveToFileExternalStorage(String fileName, String data, Context context) {
             String type = Environment.DIRECTORY_DOWNLOADS;
             File file = new File(Environment.getExternalStoragePublicDirectory(type), fileName + ".txt");
 
@@ -52,5 +53,10 @@ public class DataRecipeComments {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+
+        public static void saveToFileSharedStorage(String key, String data, SharedPreferences sharedPreferences) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(key, data).apply();
         }
 }

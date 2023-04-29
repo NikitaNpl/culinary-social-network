@@ -54,11 +54,15 @@ public class RecipeCommentsRepository {
     }
 
     public void saveToFile(String fileName, String data, Context context) {
-        dataRecipeComments.saveToFile(fileName, data, context);
+        DataRecipeComments.saveToFile(fileName, data, context);
     }
 
-    public void saveToFileSharedStorage(String fileName, String data, Context context) {
-        dataRecipeComments.saveToFileSharedStorage(fileName, data, context);
+    public void saveToFileExternalStorage(String fileName, String data, Context context) {
+        DataRecipeComments.saveToFileExternalStorage(fileName, data, context);
+    }
+
+    public void saveToFileSharedStorage(String key, String data, SharedPreferences sharedPreferences) {
+        DataRecipeComments.saveToFileSharedStorage(key, data, sharedPreferences);
     }
 
     public LiveData<List<EntityItem>> getRecipeCommentsLive() {
