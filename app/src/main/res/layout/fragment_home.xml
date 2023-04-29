@@ -31,4 +31,15 @@
         app:layout_constraintStart_toStartOf="@+id/include_home_header"
         app:layout_constraintTop_toBottomOf="@+id/search_bar" />
 
+    <fragment
+        android:id="@+id/recipesCards"
+        android:name="com.naiple.culinary_social_network.ui.fragments.RecipesFragment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/recipe_card"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="@+id/recipe_card"
+        app:layout_constraintTop_toBottomOf="@+id/recipe_card" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,7 +16,7 @@
         tools:ignore="MissingConstraints" />
 
     <ListView
-        android:id="@+id/list_view"
+        android:id="@+id/listView"
         android:layout_width="380dp"
         android:layout_height="400dp"
         android:layout_marginStart="15dp"
