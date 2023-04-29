@@ -1,4 +1,4 @@
-package com.naiple.culinary_social_network.data.adapters;
+package com.naiple.culinary_social_network.ui.adapters;
 
 
 import android.content.Context;
@@ -12,6 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.naiple.culinary_social_network.R;
+import com.naiple.culinary_social_network.data.model.Recipe;
+
+import java.util.List;
 
 public class CustomStringArrayListAdapter extends ArrayAdapter<String> {
     private LayoutInflater inflater;
@@ -34,6 +37,10 @@ public class CustomStringArrayListAdapter extends ArrayAdapter<String> {
         TextView textView = view.findViewById(R.id.listTextValue);
         textView.setText(this.names[position]);
         return view;
+    }
+
+    public void setItems(String[] items) {
+        this.names = items;
     }
 }
 
