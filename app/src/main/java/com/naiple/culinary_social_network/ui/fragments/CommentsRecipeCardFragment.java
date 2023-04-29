@@ -28,6 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.naiple.culinary_social_network.R;
+import com.naiple.culinary_social_network.data.database.EntityItem;
 import com.naiple.culinary_social_network.data.model.Item;
 import com.naiple.culinary_social_network.databinding.FragmentCommentsRecipeCardBinding;
 import com.naiple.culinary_social_network.ui.adapters.RecipeCommentsViewAdapter;
@@ -45,8 +46,11 @@ public class CommentsRecipeCardFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences sharedPrefs = requireActivity().getSharedPreferences(
+                getString(R.string.preference_file_key),
+                Context.MODE_PRIVATE);
         recipeCommentsViewModel = new ViewModelProvider(this).get(RecipeCommentsViewModel.class);
-        recipeCommentsViewModel.init(requireActivity().getApplicationContext());
+        recipeCommentsViewModel.init(requireActivity().getApplicationContext(), sharedPrefs);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             if (!checkPermission()) {
                 requestPermission();
@@ -94,7 +98,7 @@ public class CommentsRecipeCardFragment extends Fragment {
         binding.addComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Item comment = new Item("testComment");
+                EntityItem comment = new EntityItem("testComment");
                 recipeCommentsViewModel.addRecipeComment(comment);
             }
         });

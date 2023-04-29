@@ -1,12 +1,15 @@
 package com.naiple.culinary_social_network.ui.viewmodels;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Environment;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.naiple.culinary_social_network.data.database.EntityItem;
+import com.naiple.culinary_social_network.data.database.ItemDAO;
 import com.naiple.culinary_social_network.data.model.Item;
 import com.naiple.culinary_social_network.data.model.Recipe;
 import com.naiple.culinary_social_network.data.repositories.RecipeCommentsRepository;
@@ -20,16 +23,16 @@ public class RecipeCommentsViewModel extends ViewModel {
     private RecipeCommentsRepository recipeCommentsRepository;
     private Context context;
 
-    public void init(Context context) {
+    public void init(Context context, SharedPreferences sharedPrefs) {
         this.context = context;
-        recipeCommentsRepository = new RecipeCommentsRepository();
+        recipeCommentsRepository = new RecipeCommentsRepository(context);
     }
 
-    public LiveData<List<Item>> getRecipeCommentsLive() {
-        return recipeCommentsRepository.getRandomData();
+    public LiveData<List<EntityItem>> getRecipeCommentsLive() {
+        return recipeCommentsRepository.getRecipeCommentsLive();
     }
 
-    public void addRecipeComment(Item comment) {
+    public void addRecipeComment(EntityItem comment) {
         class FileStoreUtility {
             public void saveToFile(String fileName, String data, Context context) {
                 File file = new File(context.getFilesDir(), fileName + ".txt");
@@ -59,13 +62,9 @@ public class RecipeCommentsViewModel extends ViewModel {
         }
 
         FileStoreUtility fsu = new FileStoreUtility();
-        fsu.saveToFile("LastAddedComment", comment.getName(), context);
-        fsu.saveToFileSharedStorage("LastAddedComment", comment.getName(), context);
+        fsu.saveToFile("LastAddedComment", comment.getText(), context);
+        fsu.saveToFileSharedStorage("LastAddedComment", comment.getText(), context);
 
         recipeCommentsRepository.addRecipeComment(comment);
-    }
-
-    public void removeRecipeComment(Item comment) {
-        recipeCommentsRepository.removeRecipeComment(comment);
     }
 }

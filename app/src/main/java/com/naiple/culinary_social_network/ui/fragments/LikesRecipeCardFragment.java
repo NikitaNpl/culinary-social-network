@@ -77,7 +77,7 @@ public class LikesRecipeCardFragment extends Fragment {
             if (comments != null) {
                 String[] items = new String[0];
                 for (int i = 0; i < comments.size(); i += 1) {
-                    items[i] = comments.get(i).getName();
+                    items[i] = comments.get(i).getText();
                 }
                 adapter.setItems(items);
             }

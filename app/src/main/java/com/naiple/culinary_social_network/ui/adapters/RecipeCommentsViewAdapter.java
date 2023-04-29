@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.naiple.culinary_social_network.R;
+import com.naiple.culinary_social_network.data.database.EntityItem;
 import com.naiple.culinary_social_network.data.model.Item;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import java.util.List;
 public class RecipeCommentsViewAdapter extends RecyclerView.Adapter<RecipeCommentsViewAdapter.RecipeCommentsViewAdapterHolder> {
     String TAG = "CommentsRecipeCardFragment";
     Context context;
-    List<Item> comments;
+    List<EntityItem> comments;
 
     public RecipeCommentsViewAdapter(Context context) {
         this.context = context;
@@ -46,9 +47,9 @@ public class RecipeCommentsViewAdapter extends RecyclerView.Adapter<RecipeCommen
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecipeCommentsViewAdapterHolder holder, int position) {
-        Item comment = comments.get(position);
-        holder.text.setText(comment.getName());
+    public void onBindViewHolder(@NonNull RecipeCommentsViewAdapterHolder holder, @SuppressLint("RecyclerView") int position) {
+        EntityItem comment = comments.get(position);
+        holder.text.setText(comment.getText());
         holder.itemView.setOnClickListener (new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +67,7 @@ public class RecipeCommentsViewAdapter extends RecyclerView.Adapter<RecipeCommen
 
 
     @SuppressLint("NotifyDataSetChanged")
-    public void updateComments(List<Item> comments) {
+    public void updateComments(List<EntityItem> comments) {
         this.comments.clear();
         this.comments = comments;
         notifyDataSetChanged();
