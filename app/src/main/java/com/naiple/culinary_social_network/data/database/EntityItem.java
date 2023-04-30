@@ -5,6 +5,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.naiple.culinary_social_network.data.model.Item;
+
 @Entity
 public class EntityItem {
     @PrimaryKey(autoGenerate = true)
@@ -22,5 +24,9 @@ public class EntityItem {
 
     public String getText() {
         return text;
+    }
+
+    public Item toDomainModel() {
+        return new Item(text);
     }
 }

@@ -12,7 +12,7 @@ import java.util.List;
 @Dao
 public interface ItemDAO {
     @Query("SELECT * FROM EntityItem")
-    List<EntityItem> getAll();
+    LiveData<List<EntityItem>> getAll();
 
     @Query("SELECT * FROM EntityItem WHERE text IN (:text)")
     LiveData<List<EntityItem>> loadAllByTitle(String text);

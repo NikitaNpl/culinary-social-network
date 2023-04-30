@@ -98,7 +98,7 @@ public class CommentsRecipeCardFragment extends Fragment {
         binding.addComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EntityItem comment = new EntityItem("testComment");
+                Item comment = new Item("testComment");
                 recipeCommentsViewModel.addRecipeComment(comment);
             }
         });

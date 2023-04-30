@@ -22,7 +22,7 @@ import java.util.List;
 public class RecipeCommentsViewAdapter extends RecyclerView.Adapter<RecipeCommentsViewAdapter.RecipeCommentsViewAdapterHolder> {
     String TAG = "CommentsRecipeCardFragment";
     Context context;
-    List<EntityItem> comments;
+    List<Item> comments;
 
     public RecipeCommentsViewAdapter(Context context) {
         this.context = context;
@@ -48,8 +48,8 @@ public class RecipeCommentsViewAdapter extends RecyclerView.Adapter<RecipeCommen
 
     @Override
     public void onBindViewHolder(@NonNull RecipeCommentsViewAdapterHolder holder, @SuppressLint("RecyclerView") int position) {
-        EntityItem comment = comments.get(position);
-        holder.text.setText(comment.getText());
+        Item comment = comments.get(position);
+        holder.text.setText(comment.getName());
         holder.itemView.setOnClickListener (new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +67,7 @@ public class RecipeCommentsViewAdapter extends RecyclerView.Adapter<RecipeCommen
 
 
     @SuppressLint("NotifyDataSetChanged")
-    public void updateComments(List<EntityItem> comments) {
+    public void updateComments(List<Item> comments) {
         this.comments.clear();
         this.comments = comments;
         notifyDataSetChanged();
